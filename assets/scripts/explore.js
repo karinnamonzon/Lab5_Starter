@@ -19,16 +19,16 @@ function init() {
             voiceSelect.appendChild(option);
         });
     }
-    
+    //Voice Options
     populateVoiceList();
     
     if (speechSynthesis.onvoiceschanged !== undefined) {
         speechSynthesis.onvoiceschanged = populateVoiceList;
     }
     
-    //Voice Options
     const button = document.querySelector('button');
     button.addEventListener('click', () => {
+      //Text to voice
         const textToSpeak = document.getElementById('text-to-speak').value;
         const selectedVoice = voiceSelect.selectedOptions[0].getAttribute('data-name');
         
@@ -36,8 +36,8 @@ function init() {
             const utterance = new SpeechSynthesisUtterance(textToSpeak);
             const voices = speechSynthesis.getVoices();
             const selectedVoiceObj = voices.find((voice) => voice.name === selectedVoice);
-            
-            //Text to voice
+
+            //Move mouth
             if (selectedVoiceObj) {
                 utterance.voice = selectedVoiceObj;
                 speechSynthesis.speak(utterance);
@@ -47,8 +47,8 @@ function init() {
                 utterance.onend = () => {
                     faceImg.src = 'assets/images/smiling.png';
                 };
-            } else {
-                console.error('Selected voice not found');
+            } else { //error cases
+                console.error('Selected voice not found'); 
             }
         } else {
             console.error('Please enter text to speak');
