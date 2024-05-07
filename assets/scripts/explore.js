@@ -47,11 +47,7 @@ function init() {
                 utterance.onend = () => {
                     faceImg.src = 'assets/images/smiling.png';
                 };
-            } else { //error cases
-                console.error('Selected voice not found'); 
             }
-        } else {
-            console.error('Please enter text to speak');
-        }
+        } 
     });
   }
