@@ -21,8 +21,8 @@ function init() {
     }
     //Voice Options
     populateVoiceList();
-    
-    if (speechSynthesis.onvoiceschanged !== undefined) {
+    if (speechSynthesis.onvoiceschanged !== undefined) 
+    {
         speechSynthesis.onvoiceschanged = populateVoiceList;
     }
     
@@ -31,19 +31,18 @@ function init() {
       //Text to voice
         const textToSpeak = document.getElementById('text-to-speak').value;
         const selectedVoice = voiceSelect.selectedOptions[0].getAttribute('data-name');
-        
         if (textToSpeak !== '') {
             const utterance = new SpeechSynthesisUtterance(textToSpeak);
             const voices = speechSynthesis.getVoices();
-            const selectedVoiceObj = voices.find((voice) => voice.name === selectedVoice);
+            const talking = voices.find((voice) => voice.name === selectedVoice);
 
             //Move mouth
-            if (selectedVoiceObj) {
-                utterance.voice = selectedVoiceObj;
+            if(talking) 
+            {
+                utterance.voice = talking;
                 speechSynthesis.speak(utterance);
                 const faceImg = document.querySelector('img');
                 faceImg.src = 'assets/images/smiling-open.png';
-                
                 utterance.onend = () => {
                     faceImg.src = 'assets/images/smiling.png';
                 };
