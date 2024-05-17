@@ -31,22 +31,17 @@ function init() {
       //Text to voice
         const textToSpeak = document.getElementById('text-to-speak').value;
         const selectedVoice = voiceSelect.selectedOptions[0].getAttribute('data-name');
-        if (textToSpeak !== '') {
+        if (textToSpeak !== '') { //not empty
             const utterance = new SpeechSynthesisUtterance(textToSpeak);
             const voices = speechSynthesis.getVoices();
             const talking = voices.find((voice) => voice.name === selectedVoice);
 
             //Move mouth
-            if(talking) 
-            {
-                utterance.voice = talking;
-                speechSynthesis.speak(utterance);
-                const faceImg = document.querySelector('img');
-                faceImg.src = 'assets/images/smiling-open.png';
-                utterance.onend = () => {
-                    faceImg.src = 'assets/images/smiling.png';
-                };
-            }
+            utterance.voice = talking;
+            speechSynthesis.speak(utterance);
+            const faceImg = document.querySelector('img');
+            faceImg.src = 'assets/images/smiling-open.png';
+            utterance.onend = () => { faceImg.src = 'assets/images/smiling.png'; };
         } 
     });
   }
